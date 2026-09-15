@@ -1,0 +1,22 @@
+header  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: #1a1a2e;
+}
+
+nav a   {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+nav a:hover    {
+    background-color: rgba(255, 255, 254, 0.15);
+    box-shadow: 0 0 12px #f8f7f7;
+}
