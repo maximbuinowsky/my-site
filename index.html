@@ -1,24 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Games</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <a href="index.html">
-            <img src="preview(head).png" alt="Study Games" width="300" height="100">
+    <header class="site-header">
+        <a class="logo" href="index.html">
+            <img src="preview(head).png" alt="Study Games — на главную" width="300" height="100">
         </a>
-        <nav>
-            <a href="#">Поиск</a>
-            <a href="#">Каталог</a>
-            <a href="#">Гарантии</a>
-            <a href="#">Помощь</a>
-            <a href="#">Корзина</a>
-            <a href="#">Личный кабинет</a>
+
+        <form class="search" role="search" action="catalog.html">
+            <input type="search" id="search-input" name="q"
+                   placeholder="Поиск игры…" aria-label="Поиск игры">
+        </form>
+
+        <button class="burger" id="burger" type="button"
+                aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">☰</button>
+
+        <nav class="main-nav" id="main-nav">
+            <a href="index.html" aria-current="page">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="guarantees.html">Гарантии</a>
+            <a href="help.html">Помощь</a>
+            <a href="cabinet.html">Личный кабинет</a>
+            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
         </nav>
     </header>
+
+    <main>
+        <!-- здесь будет содержимое страницы -->
+    </main>
 </body>
 </html>

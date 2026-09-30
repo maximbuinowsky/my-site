@@ -1,22 +1,138 @@
-header  {
+/* ---------- Общее ---------- */
+body {
+    margin: 0;                     /* убирает белую рамку вокруг шапки */
+    font-family: Arial, sans-serif;
+}
+
+/* ---------- Шапка ---------- */
+.site-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     padding: 15px 30px;
     background-color: #1a1a2e;
+    position: relative;            /* нужно для выпадающего меню на телефоне */
 }
 
-nav a   {
+.logo img {
+    display: block;
+    height: 48px;                  /* логотип ниже, чтобы шапка не была огромной */
+    width: auto;
+}
+
+/* ---------- Поиск ---------- */
+.search {
+    flex: 1;
+    max-width: 320px;
+}
+
+.search input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 14px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 14px;
+}
+
+.search input::placeholder {
+    color: #c9c9d6;
+}
+
+.search input:focus {
+    outline: none;
+    border-color: #6d4aff;
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Меню ---------- */
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav a {
     color: white;
     text-decoration: none;
     margin-left: 15px;
     padding: 8px 14px;
     border-radius: 6px;
-    font-family: Arial, sans-serif;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-nav a:hover    {
+.main-nav a:hover,
+.main-nav a:focus-visible {
     background-color: rgba(255, 255, 254, 0.15);
     box-shadow: 0 0 12px #f8f7f7;
+    outline: none;
+}
+
+/* текущая страница */
+.main-nav a[aria-current="page"] {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* счётчик корзины */
+.cart-count {
+    display: inline-block;
+    min-width: 18px;
+    padding: 1px 5px;
+    margin-left: 4px;
+    border-radius: 10px;
+    background-color: #6d4aff;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ---------- Бургер (скрыт на компьютере) ---------- */
+.burger {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    color: white;
+    font-size: 22px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+/* ---------- Телефон и планшет: до 768 px ---------- */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 12px 16px;
+    }
+
+    .search {
+        max-width: none;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .main-nav {
+        display: none;             /* скрыто, пока не нажали на бургер */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        background-color: #1a1a2e;
+        padding: 8px 16px 16px;
+        z-index: 10;
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    .main-nav a {
+        margin-left: 0;
+        padding: 12px 14px;
+    }
 }
