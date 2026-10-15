@@ -91,6 +91,64 @@ searchInput.addEventListener('input', function () {
     }
 });
 
+
 //  Запуск 
 updateCartCount();
 showHotGames();
+const modal = document.getElementById('gameModal');
+const closeBtn = modal.querySelector('.modal__close');
+
+// Функция, которая наполняет окно данными и открывает его
+function openGameModal(gameData) {
+    document.getElementById('modalImg').src = gameData.image;
+    document.getElementById('modalMeta').textContent = `${gameData.genre} · ${gameData.year}`;
+    document.getElementById('modalTitle').textContent = gameData.title;
+    document.getElementById('modalDesc').textContent = gameData.description;
+    document.getElementById('modalBadge').textContent = gameData.platform;
+    document.getElementById('modalPrice').textContent = `${gameData.price} ₽`;
+
+    // Показываем окно: добавляем класс .open из CSS
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // отключаем прокрутку сайта под открытым окном
+}
+
+// Функция закрытия окна
+function closeGameModal() {
+    modal.classList.remove('open'); // убираем класс .open, окно снова скрывается (display: none)
+    document.body.style.overflow = ''; // возвращаем прокрутку сайту
+}
+
+// 1. Закрытие по клику на крестик
+closeBtn.addEventListener('click', closeGameModal);
+
+// 2. Закрытие по клику на темную область вокруг карточки
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeGameModal();
+    }
+});
+
+// 3. Закрытие по нажатию клавиши Esc на клавиатуре
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) {
+        closeGameModal();
+    }
+});
+
+// Пример: вешаем событие клика на карточки игр на странице
+document.querySelectorAll('.game-card').forEach((card) => {
+    card.addEventListener('click', () => {
+        // Собираем данные из карточки (или берем из твоего массива games.js)
+        const clickedGame = {
+            title: card.querySelector('h3')?.textContent || 'Игра',
+            price: 1199,
+            genre: 'RPG',
+            year: 2022,
+            platform: 'Steam',
+            description: 'Здесь будет подробное описание игры...',
+            image: card.querySelector('img').src
+        };
+        
+        openGameModal(clickedGame); // Вызываем функцию открытия
+    });
+});

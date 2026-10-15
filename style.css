@@ -193,6 +193,7 @@ p {
     padding: 12px; /* внутренние отступы карточки */
     background: white;
     border-radius: 12px; /* скругление углов карточки */
+    cursor: pointer; /* курсор-палец при наведении на карточку */
 }
 
 .game-card img {
@@ -336,6 +337,84 @@ p {
 .footer__note {
     color: var(--color-muted);
     font-size: 12px; /* мелкий шрифт для копирайтов или примечаний */
+}
+
+/* Прячем модальное окно по умолчанию */
+.modal {
+    display: none;
+    position: fixed; /* фиксируем окно намертво поверх экрана */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* тот самый полупрозрачный темный фон сзади */
+    z-index: 100; /* поднимаем окно выше всех остальных элементов сайта */
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+/* Класс, который делает окно видимым (его будет включать JavaScript) */
+.modal.open {
+    display: flex;
+}
+
+/* Внешний вид самой белой карточки по центру */
+.modal__content {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 700px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto; /* если текст длинный, появится скролл внутри окна */
+}
+
+/* Кнопка крестика */
+.modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* кнопка крестика при наведении */
+.modal__close:hover { 
+    color: var(--color-danger);
+    transition: color 0.3s; /* плавное изменение цвета при наведении */
+}
+
+.modal__body {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.modal__body img {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal_btn {
+    margin-top: 100px;
+    display: block;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-dark);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal_btn:hover {
+    background-color: var(--color-primary); /* меняем цвет при наведении мыши */
 }
 
 /* Медиа-запрос: Планшеты (экраны от 769px и шире) */

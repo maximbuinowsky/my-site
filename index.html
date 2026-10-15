@@ -108,5 +108,26 @@
             </p>
         </div>
     </footer>
+    <!-- Затемненный фон и само модальное окно -->
+<div id="gameModal" class="modal" aria-hidden="true">
+    <div class="modal__content">
+        <button class="modal__close" aria-label="Закрыть модальное окно">&times;</button>
+        
+        <div class="modal__body">
+            <img id="modalImg" src="" alt="Обложка игры">
+            <div class="modal__info">
+                <span id="modalMeta" class="meta"></span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDesc"></p>
+                <div class="modal__row">
+                    <span id="modalBadge" class="badge"></span>
+                    <span id="modalPrice" class="price"></span>
+                </div>
+                <button id="modalAddToCart" class="modal_btn">В корзину</button>
+                <div id="modalInstruction" class="instruction"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
