@@ -1,138 +1,410 @@
-/* ---------- Общее ---------- */
-body {
-    margin: 0;                     /* убирает белую рамку вокруг шапки */
-    font-family: Arial, sans-serif;
+/* Основные цвета сайта */
+:root {
+    --color-dark: #1a1a2e; /* глубокий темно-синий цвет */
+    --color-primary: #6d4aff; /* основной фиолетовый акцент */
+    --color-bg: #f4f5fa; /* общий цвет фона страницы */
+    --color-muted: #5b6070; /* приглушенный серый для текста */
+    --color-danger: #c8323f; /* красный для иконок/ошибок */
 }
 
-/* ---------- Шапка ---------- */
+/* Сброс стилей, чтобы рамки и отступы не ломали верстку */
+* {
+    box-sizing: border-box; /* включает размер элемента вместе с рамками и отступами */
+}
+
+body {
+    margin: 0; /* убираем стандартный отступ страницы от браузера */
+    font-family: Inter, Arial, sans-serif; /* шрифт по умолчанию */
+    color: var(--color-dark); /* основной цвет текста */
+}
+
+h1, h2, h3 {
+    font-family: Montserrat, Arial, sans-serif; /* отдельный шрифт для заголовков */
+    margin: 0; /* убираем стандартные отступы заголовков */
+}
+
+p {
+    margin: 0; /* убираем стандартные отступы у параграфов */
+}
+
+/* Центрирующий блок для контента */
+.container {
+    max-width: 1200px; /* максимальная ширина контейнера */
+    margin: 0 auto; /* центрируем блок по горизонтали */
+    padding: 0 16px; /* внутренние отступы слева и справа */
+}
+
+/* Шапка сайта */
 .site-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 15px 30px;
+    display: flex; /* делает элементы внутри шапки гибкими (в ряд) */
+    align-items: center; /* выравнивает элементы по вертикали по центру */
+    justify-content: space-between; /* раскидывает элементы по краям (логотип слева, меню справа) */
+    flex-wrap: wrap;             /* разрешаем элементам переноситься на новую строку при нехватке места */
+    gap: 16px; /* отступ между элементами внутри шапки */
+    padding: 15px 30px; /* внутренние отступы шапки */
     background-color: #1a1a2e;
-    position: relative;            /* нужно для выпадающего меню на телефоне */
+    position: relative; /* задаем систему координат, чтобы дочернее меню знало, где позиционироваться */
 }
 
 .logo img {
-    display: block;
-    height: 48px;                  /* логотип ниже, чтобы шапка не была огромной */
-    width: auto;
+    display: block; /* убираем лишний нижний отступ у картинки */
+    height: 48px; /* фиксируем высоту логотипа */
+    width: auto; /* ширина подстраивается пропорционально */
 }
 
-/* ---------- Поиск ---------- */
+/* Поиск */
 .search {
-    flex: 1;
-    max-width: 320px;
+    flex: 1; /* позволяет блоку поиска растягиваться */
+    max-width: 320px; /* ограничиваем максимальную ширину */
+    position: relative; /* нужно для привязки выпадающих подсказок прямо под инпутом */
 }
 
 .search input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 9px 14px;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.12);
+    width: 100%; /* растягиваем поле ввода на всю ширину блока */
+    padding: 9px 14px; /* внутренние отступы текста в поле */
+    border: 1px solid transparent; /* прозрачная рамка по умолчанию */
+    border-radius: 20px; /* сильное скругление в виде капсулы */
+    background-color: rgba(255, 255, 255, 0.12); /* полупрозрачный белый фон */
     color: white;
     font-size: 14px;
 }
 
 .search input::placeholder {
-    color: #c9c9d6;
+    color: #c9c9d6; /* цвет текста-подсказки внутри поля */
 }
 
 .search input:focus {
-    outline: none;
-    border-color: #6d4aff;
-    background-color: rgba(255, 255, 255, 0.18);
+    outline: none; /* убираем стандартную обводку браузера */
+    border-color: #6d4aff; /* меняем цвет рамки при фокусе */
+    background-color: rgba(255, 255, 255, 0.18); /* делаем фон чуть светлее */
 }
 
-/* ---------- Меню ---------- */
+/* Выпадающий список с подсказками при поиске */
+.suggestions {
+    position: absolute; /* вырываем список из потока документа, чтобы он висел поверх */
+    top: 100%; /* прижимаем список ровно под поле ввода */
+    left: 0; /* выравниваем по левому краю */
+    right: 0; /* растягиваем до правого края */
+    z-index: 5; /* поднимаем список выше остальных элементов */
+    margin: 4px 0 0; /* небольшой отступ сверху */
+    padding: 0; /* убираем стандартные внутренние отступы браузера для списка */
+    list-style: none; /* убираем стандартные точки у списка */
+    background: white;
+    border-radius: 8px; /* скругление углов списка */
+}
+
+.suggestions a {
+    display: block; /* делаем ссылку блочной, чтобы кликалась вся строка */
+    padding: 8px 14px; /* внутренние отступы пунктов */
+    color: var(--color-dark);
+    text-decoration: none; /* убираем подчеркивание ссылок */
+}
+
+.suggestions a:hover {
+    background-color: var(--color-bg); /* подсветка при наведении мыши */
+}
+
+/* Навигация в шапке */
 .main-nav {
-    display: flex;
-    align-items: center;
+    display: flex; /* выстраиваем ссылки в меню в один ряд */
+    align-items: center; /* выравниваем по вертикали */
 }
 
 .main-nav a {
     color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    text-decoration: none; /* убираем подчеркивание */
+    margin-left: 15px; /* отступ слева от каждой ссылки */
+    padding: 8px 14px; /* внутренние отступы ссылок */
+    border-radius: 6px; /* скругление углов */
+    transition: background-color 0.3s, box-shadow 0.3s; /* плавность анимации при наведении */
 }
 
 .main-nav a:hover,
 .main-nav a:focus-visible {
-    background-color: rgba(255, 255, 254, 0.15);
-    box-shadow: 0 0 12px #f8f7f7;
-    outline: none;
+    background-color: rgba(255, 255, 254, 0.15); /* полупрозрачный фон при наведении/фокусе */
+    box-shadow: 0 0 12px #f8f7f7; /* легкое свечение ссылки */
+    outline: none; /* убираем стандартный аутлайн */
 }
 
-/* текущая страница */
+/* Подсветка открытой страницы в меню */
 .main-nav a[aria-current="page"] {
-    background-color: rgba(255, 255, 255, 0.22);
+    background-color: rgba(255, 255, 255, 0.22); /* выделяем активную страницу более плотным фоном */
 }
 
-/* счётчик корзины */
+/* Счетчик товаров возле корзины */
 .cart-count {
-    display: inline-block;
-    min-width: 18px;
-    padding: 1px 5px;
-    margin-left: 4px;
-    border-radius: 10px;
+    display: inline-block; /* позволяет задавать размеры строчному элементу */
+    min-width: 18px; /* минимальная ширина, чтобы цифра не сжималась в точку */
+    padding: 1px 5px; /* внутренние отступы вокруг цифры */
+    margin-left: 4px; /* отступ от слова «Корзина» */
+    border-radius: 10px; /* сильное скругление (эффект капсулы) */
     background-color: #6d4aff;
     color: white;
     font-size: 12px;
-    text-align: center;
+    text-align: center; /* выравниваем цифру по центру */
 }
 
-/* ---------- Бургер (скрыт на компьютере) ---------- */
+/* Кнопка меню (бургер) для телефонов */
 .burger {
-    display: none;
+    display: none; /* скрываем кнопку на компьютерах */
     background: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4); /* полупрозрачная рамка */
     border-radius: 6px;
     color: white;
     font-size: 22px;
     padding: 4px 12px;
-    cursor: pointer;
+    cursor: pointer; /* меняем курсор на палец при наведении */
 }
 
-/* ---------- Телефон и планшет: до 768 px ---------- */
-@media (max-width: 768px) {
-    .site-header {
-        padding: 12px 16px;
+/* Секция с карточками игр */
+.hero {
+    padding: 32px 0; /* вертикальные отступы секции */
+    background-color: var(--color-bg);
+}
+
+.eyebrow {
+    margin-bottom: 8px;
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase; /* переводим текст в верхний регистр (все буквы заглавные) */
+}
+
+.hero h1 {
+    font-size: 26px;
+}
+
+.hero-lead {
+    margin: 8px 0 24px; /* отступы сверху и снизу */
+    color: var(--color-muted);
+}
+
+/* Сетка для игр: по умолчанию 2 колонки */
+.game-grid {
+    display: grid; /* включаем CSS Grid для создания сетки */
+    grid-template-columns: repeat(2, 1fr); /* создаем 2 одинаковые колонки */
+    gap: 8px; /* расстояние между карточками */
+}
+
+.game-card {
+    display: flex; /* делаем карточку гибкой для вертикального расположения элементов */
+    flex-direction: column; /* располагаем элементы карточки (картинка, текст, кнопка) друг под другом */
+    gap: 4px; /* отступ между элементами внутри карточки */
+    padding: 12px; /* внутренние отступы карточки */
+    background: white;
+    border-radius: 12px; /* скругление углов карточки */
+}
+
+.game-card img {
+    width: 100%; /* картинка занимает всю ширину карточки */
+    aspect-ratio: 4 / 3; /* фиксируем пропорции картинки (ширина к высоте) */
+    object-fit: cover; /* обрезает картинку по размеру блока без искажения пропорций */
+    object-position: center top; /* сдвигает фокус картинки ближе к верху */
+    border-radius: 8px; /* скругление углов самой картинки */
+    background-color: var(--color-bg);   /* цвет-заглушка, пока фото не загрузилось */
+}
+
+.meta {
+    color: var(--color-muted);
+    font-size: 12px; /* уменьшенный шрифт для метаданных (жанр, год) */
+}
+
+/* Бейдж с названием платформы (Steam / GOG) */
+.badge {
+    align-self: flex-start; /* выравниваем бейдж по левому краю независимо от других элементов */
+    padding: 2px 8px; /* внутренние отступы текста в бейдже */
+    border: 2px solid var(--color-dark); /* рамка вокруг бейджа */
+    border-radius: 6px; /* скругление рамки */
+    font-size: 12px;
+    font-weight: bold; /* жирный текст */
+}
+
+.price-row {
+    display: flex; /* выстраиваем цену и иконку избранного в одну строку */
+    align-items: center; /* центрируем по вертикали */
+    justify-content: space-between; /* разносим цену влево, а сердечко вправо */
+    margin: 8px 0; /* вертикальные отступы строки цены */
+}
+
+.heart {
+    border: none;
+    background: none; /* убираем стандартный фон кнопки */
+    color: var(--color-danger);
+    font-size: 22px; /* размер иконки сердечка */
+    cursor: pointer; /* курсор-палец при наведении */
+}
+
+/* Кнопка покупки */
+.btn {
+    padding: 10px 16px; /* внутренние отступы кнопки */
+    border: none;
+    border-radius: 8px; /* скругление углов кнопки */
+    background-color: var(--color-dark);
+    color: white;
+    font-weight: bold;
+    cursor: pointer; /* курсор-палец */
+}
+
+.btn:hover {
+    background-color: var(--color-primary); /* меняем цвет при наведении мыши */
+}
+
+.btn:active {
+    background-color: black; /* цвет при клике на кнопку */
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--color-primary); /* появление обводки при навигации с клавиатуры (Tab) */
+    outline-offset: 2px; /* отступ обводки от кнопки */
+}
+
+/* Секция новостей */
+.news {
+    padding: 48px 0; /* отступы секции сверху и снизу */
+}
+
+.news h2 {
+    margin-bottom: 24px; /* отступ снизу от заголовка новостей */
+}
+
+.news-grid {
+    display: grid; /* включаем сетку */
+    grid-template-columns: 1fr; /* одна колонка по умолчанию (на мобилках) */
+    gap: 16px; /* расстояние между новостями */
+}
+
+.news-card {
+    border: 1px solid #ddd; /* тонкая рамка вокруг карточки новости */
+    border-radius: 12px;
+    overflow: hidden; /* скрываем всё, что вылезает за скругленные углы карточки */
+}
+
+.news-card__banner {
+    padding: 32px 16px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center; /* центрируем текст внутри цветного баннера */
+}
+
+/* Разные цвета для баннеров новостей */
+.banner-1 { background-color: var(--color-dark); }
+.banner-2 { background-color: var(--color-primary); }
+.banner-3 { background-color: var(--color-muted); }
+
+.news-card__body {
+    display: flex;
+    flex-direction: column; /* текст и дата идут друг под другом */
+    gap: 8px; /* отступ между ними */
+    padding: 16px; /* внутренний отступ текста новости */
+}
+
+.news-card__body p {
+    color: var(--color-muted);
+}
+
+.news-card__date {
+    font-size: 12px; /* мелкий шрифт для даты публикации */
+}
+
+/* Подвал сайта */
+.site-footer {
+    padding: 32px 0;
+    background-color: var(--color-bg);
+}
+
+.footer__inner {
+    display: flex;
+    flex-direction: column; /* элементы подвала располагаются друг под другом */
+    gap: 16px; /* отступ между блоками подвала */
+}
+
+.footer__nav,
+.footer__social {
+    display: flex;
+    flex-wrap: wrap; /* ссылки переносятся на новую строку, если не помещаются */
+    gap: 8px 24px; /* отступы между ссылками */
+    margin: 0;
+    padding: 0;
+    list-style: none; /* убираем точки у списков в футере */
+}
+
+.site-footer a {
+    color: var(--color-dark);
+}
+
+.footer__note {
+    color: var(--color-muted);
+    font-size: 12px; /* мелкий шрифт для копирайтов или примечаний */
+}
+
+/* Медиа-запрос: Планшеты (экраны от 769px и шире) */
+@media (min-width: 769px) {
+    .container {
+        padding: 0 32px; /* увеличиваем боковые отступы контейнера на больших экранах */
     }
 
-    .search {
-        max-width: none;
+    .hero h1 {
+        font-size: 32px; /* увеличиваем заголовок */
+    }
+
+    .game-grid {
+        gap: 16px; /* увеличиваем промежутки между карточками игр */
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr); /* превращаем новости в сетку из 3 колонок */
+    }
+}
+
+/* Медиа-запрос: Компьютеры (экраны от 1024px и шире) */
+@media (min-width: 1024px) {
+    .game-grid {
+        grid-template-columns: repeat(4, 1fr); /* расширяем сетку игр до 4 колонок */
+    }
+}
+
+/* Медиа-запрос: Телефоны (экраны до 768px включительно) */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 12px 16px; /* уменьшаем отступы в шапке для мобилок */
+    }
+
+    .logo {
+        order: 1; /* ставим логотип на первое место в шапке */
     }
 
     .burger {
-        display: block;
+        order: 2; /* ставим бургер-кнопку на второе место */
+        display: block; /* показываем кнопку меню на мобилках */
+    }
+
+    .search {
+        order: 3; /* переносим поиск на третий ряд */
+        flex-basis: 100%; /* заставляем поиск занимать всю доступную ширину */
+        max-width: none; /* убираем ограничение максимальной ширины */
     }
 
     .main-nav {
-        display: none;             /* скрыто, пока не нажали на бургер */
-        position: absolute;
-        top: 100%;
+        display: none; /* скрываем стандартное горизонтальное меню по умолчанию */
+        position: absolute; /* позиционируем выпадающее меню поверх страницы */
+        top: 100%; /* привязываем его сразу под шапку */
         left: 0;
         right: 0;
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column; /* располагаем ссылки в меню вертикально столбиком */
+        align-items: stretch; /* растягиваем ссылки на всю ширину экрана */
         background-color: #1a1a2e;
         padding: 8px 16px 16px;
         z-index: 10;
     }
 
+    /* Класс добавляется через JavaScript при клике на бургер для открытия меню */
     .main-nav.open {
-        display: flex;
+        display: flex; /* показываем меню, когда есть класс open */
     }
 
     .main-nav a {
-        margin-left: 0;
-        padding: 12px 14px;
+        margin-left: 0; /* сбрасываем левый отступ для вертикального меню */
+        padding: 12px 14px; /* увеличиваем область нажатия на ссылки для удобства на телефоне */
     }
 }

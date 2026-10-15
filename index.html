@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Games</title>
+    <title>Study Games — магазин ключей для игр</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <script src="datagames.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <a class="logo" href="index.html">
-            <img src="preview(head).png" alt="Study Games — на главную" width="300" height="100">
+            <img src="img/preview(head).png" alt="Study Games — на главную" width="300" height="100">
         </a>
 
         <form class="search" role="search" action="catalog.html">
             <input type="search" id="search-input" name="q"
-                   placeholder="Поиск игры…" aria-label="Поиск игры">
+                   placeholder="Поиск игры…" aria-label="Поиск игры" autocomplete="off">
+            <ul class="suggestions" id="suggestions"></ul>
         </form>
 
         <button class="burger" id="burger" type="button"
@@ -32,7 +37,76 @@
     </header>
 
     <main>
-        <!-- здесь будет содержимое страницы -->
+        <!-- Горячие предложения: карточки добавляет script.js -->
+        <section class="hero">
+            <div class="container">
+                <p class="eyebrow">Горячие предложения</p>
+                <h1>Ключи к играм по выгодным ценам</h1>
+                <p class="hero-lead">Мгновенная выдача ключа после оплаты</p>
+
+                <div class="game-grid" id="hot-grid"></div>
+            </div>
+        </section>
+
+        <!-- Новости и акции: 3 карточки -->
+        <section class="news">
+            <div class="container">
+                <h2>Новости и акции</h2>
+
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-card__banner banner-1">Акция</div>
+                        <div class="news-card__body">
+                            <h3>Осенняя распродажа</h3>
+                            <p>Больше сотни ключей для Steam, GOG и Epic Games по сниженным ценам до конца октября.</p>
+                            <p class="news-card__date">28 сен 2026</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card__banner banner-2">NEW</div>
+                        <div class="news-card__body">
+                            <h3>Новинки месяца уже в каталоге</h3>
+                            <p>Добавили свежие релизы 2025 года. Платформа активации указана на каждой карточке.</p>
+                            <p class="news-card__date">2 окт 2026</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card__banner banner-3">GOG</div>
+                        <div class="news-card__body">
+                            <h3>Теперь и ключи для GOG</h3>
+                            <p>В магазине появились игры для GOG. Инструкцию активации ищите в разделе «Помощь».</p>
+                            <p class="news-card__date">8 окт 2026</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="site-footer">
+        <div class="container footer__inner">
+            <nav class="footer__nav">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="guarantees.html">Гарантии</a>
+                <a href="help.html">Помощь</a>
+                <a href="cabinet.html">Личный кабинет</a>
+                <a href="cart.html">Корзина</a>
+            </nav>
+
+            <ul class="footer__social">
+                <li><a href="https://web.telegram.org/">Telegram</a></li>
+                <li><a href="https://discord.com/">Discord</a></li>
+                <li><a href="https://github.com/">GitHub</a></li>
+            </ul>
+
+            <p class="footer__note">
+                © 2026 Study Games — учебный проект. Не связан с Valve (Steam), GOG и Epic Games;
+                названия платформ используются только для обозначения того, где активируется ключ.
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
